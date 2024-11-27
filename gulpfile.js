@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const concat = require('gulp-concat-css');
 const plumber = require('gulp-plumber');
 const del = require('del');
+const { default: postcss } = require('postcss');
 const browserSync = require('browser-sync').create();
 
 function serve() {
@@ -27,10 +28,12 @@ function fonts() {
   }
 
 function css() {
+    // const plugins = []
   return gulp.src('src/css/*.css')
         .pipe(plumber())
-        .pipe(concat('bundle.css'))
-				.pipe(gulp.dest('dist/'))
+            .pipe(concat('bundle.css'))
+                // .pipe(postcss(plugins))
+		    .pipe(gulp.dest('dist/'))
         .pipe(browserSync.reload({stream: true}));
 }
 
